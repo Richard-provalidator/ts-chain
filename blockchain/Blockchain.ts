@@ -1,10 +1,13 @@
 import Block from "./Block";
+import Transaction from "./Transaction";
 
 class Blockchain {
   chain: Block[];
+  difficulty: number;
 
   constructor() {
     this.chain = [this.createGenesisBlock()];
+    this.difficulty = 3;
   }
 
   private createGenesisBlock(): Block {
@@ -15,9 +18,15 @@ class Blockchain {
     return this.chain[this.chain.length - 1];
   }
 
-  addBlock(newBlock: Block): void {
-    newBlock.previousHash = this.getLatestBlock().hash;
-    newBlock.hash = newBlock.calculateHash();
+  addBlock(transactions: Transaction[]): void {
+    const newBlock = new Block(
+      this.chain.length,
+      transactions,
+      this.getLatestBlock().hash
+    );
+
+    console.log("Mining new block...");
+    newBlock.mineBlock(this.difficulty);
     this.chain.push(newBlock);
   }
 

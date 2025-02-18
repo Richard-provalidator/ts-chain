@@ -1,14 +1,46 @@
+import Wallet from "../wallet/Wallet";
+
 class Transaction {
   sender: string | null;
   receiver: string;
   amount: number;
   timestamp: string;
+  signature: string | null = null;
 
   constructor(sender: string | null, receiver: string, amount: number) {
     this.sender = sender;
     this.receiver = receiver;
     this.amount = amount;
     this.timestamp = new Date().toISOString();
+  }
+
+  signTransaction(wallet: Wallet): void {
+    if (wallet.publicKey !== this.sender) {
+      throw new Error("Transaction signing is only allowed by the sender.");
+    }
+    const data = this.calculateHash();
+    this.signature = wallet.signTransaction(data);
+  }
+
+  isValid(): boolean {
+    if (this.sender === null) return true;
+    if (!this.signature) {
+      throw new Error("No signature in this transaction.");
+    }
+    return Wallet.verifySignature(
+      this.sender,
+      this.calculateHash(),
+      this.signature
+    );
+  }
+
+  calculateHash(): string {
+    return JSON.stringify({
+      sender: this.sender,
+      receiver: this.receiver,
+      amount: this.amount,
+      timestamp: this.timestamp,
+    });
   }
 
   toString(): string {

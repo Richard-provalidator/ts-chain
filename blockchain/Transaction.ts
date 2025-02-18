@@ -2,9 +2,9 @@ import Wallet from "../wallet/Wallet";
 
 class Transaction {
   sender: string | null;
-  senderPublicKey: string | null = null;
   receiver: string;
   amount: number;
+  senderPublicKey: string | null;
   timestamp: string;
   signature: string | null = null;
 
@@ -12,12 +12,14 @@ class Transaction {
     sender: string | null,
     receiver: string,
     amount: number,
+    senderPublicKey: string | null = null,
     signature: string | null = null,
     timestamp: string = new Date().toISOString()
   ) {
     this.sender = sender;
     this.receiver = receiver;
     this.amount = amount;
+    this.senderPublicKey = senderPublicKey;
     this.signature = signature;
     this.timestamp = timestamp;
   }
@@ -65,6 +67,7 @@ class Transaction {
       data.sender,
       data.receiver,
       data.amount,
+      data.senderPublicKey,
       data.signature,
       data.timestamp
     );

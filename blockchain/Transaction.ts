@@ -1,6 +1,15 @@
 import Wallet from "../wallet/Wallet";
 
-class Transaction {
+export interface TransactionData {
+  sender: string | null;
+  receiver: string;
+  amount: number;
+  senderPublicKey: string | null;
+  timestamp: string;
+  signature: string | null;
+}
+
+class Transaction implements TransactionData {
   sender: string | null;
   receiver: string;
   amount: number;
@@ -58,11 +67,7 @@ class Transaction {
     });
   }
 
-  toString(): string {
-    return JSON.stringify(this);
-  }
-
-  static fromJSON(data: any): Transaction {
+  static fromJSON(data: TransactionData): Transaction {
     return new Transaction(
       data.sender,
       data.receiver,

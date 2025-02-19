@@ -3,7 +3,13 @@ import * as crypto from "crypto";
 
 const ec = new EC("secp256k1");
 
-class Wallet {
+export interface WalletData {
+  privateKey: string;
+  publicKey: string;
+  address: string;
+}
+
+class Wallet implements WalletData {
   privateKey: string;
   publicKey: string;
   address: string;
@@ -20,6 +26,7 @@ class Wallet {
   }
 
   signTransaction(data: string): string {
+    console.log("wallet", data);
     const keyPair = ec.keyFromPrivate(this.privateKey, "hex");
     const hash = crypto.createHash("sha256").update(data).digest("hex");
     const signature = keyPair.sign(hash, "base64");
@@ -38,6 +45,10 @@ class Wallet {
 
   toString(): string {
     return JSON.stringify(this);
+  }
+
+  static fromJSON(data: WalletData): Wallet {
+    return new Wallet();
   }
 }
 

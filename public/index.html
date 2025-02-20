@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blockchain Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Blockchain Dashboard</h1>
+    </header>
+    <main>
+      <section id="wallets">
+        <h2>Create Wallet</h2>
+        <button id="create-wallet">Create Wallet</button>
+        <div id="wallets-list"></div>
+      </section>
+
+      <section id="wallet">
+        <h2>Wallets</h2>
+        <input id="wallet-address" type="text" placeholder="Input Address" />
+        <button id="get-wallet">Get Wallet</button>
+        <div id="wallet-status"></div>
+      </section>
+
+      <section id="blocks">
+        <h2>Blockchain</h2>
+        <button id="fetch-blocks">Fetch Blocks</button>
+        <div id="blocks-list"></div>
+      </section>
+
+      <section id="transactions">
+        <h2>Create Transaction</h2>
+        <input id="sender" type="text" placeholder="Sender Address" />
+        <input id="receiver" type="text" placeholder="Receiver Address" />
+        <input id="amount" type="number" placeholder="Amount" />
+        <button id="create-transaction">Submit Transaction</button>
+        <div id="transactions-status"></div>
+      </section>
+
+      <section id="pool">
+        <h2>Pool</h2>
+        <button id="get-pool">Get Pool</button>
+        <div id="pool-status"></div>
+      </section>
+
+      <section id="mine">
+        <h2>Mine</h2>
+        <input id="miner" type="text" placeholder="Miner Address" />
+        <button id="create-mine">Submit Mine</button>
+        <div id="mine-status"></div>
+      </section>
+
+      <section id="balance">
+        <h2>Balance</h2>
+        <input id="address" type="text" placeholder="Input Address" />
+        <button id="get-balance">Get Balance</button>
+        <div id="balance-status"></div>
+      </section>
+
+      <section id="block">
+        <h2>Block</h2>
+        <input id="block-number" type="text" placeholder="Input Block Number" />
+        <button id="get-block">Get Block</button>
+        <div id="block-status"></div>
+      </section>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
